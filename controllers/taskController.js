@@ -223,11 +223,11 @@ const getDashboardData = async (req, res) => {
         ])
         const taskDistribution = taskStatuses.reduce((acc, status) => {
             const formattedKey = status.replace(/\s+/g, "");
-            acc[formattedKey] = taskDistributionRaw.find((item) => item._id == status)?.count || 0;
+            acc[formattedKey] = taskDistributionRaw.find((item) => item._id === status)?.count || 0;
             return acc;
         }, {});
-        const taskPriorities = ["Low", "Medium", "High"];
         taskDistribution['All'] = totalTasks;
+        const taskPriorities = ["Low", "Medium", "High"];
         const taskPriortyLevelsRaw = await Task.aggregate([
             {
                 $group: {
@@ -239,7 +239,7 @@ const getDashboardData = async (req, res) => {
         const taskPriorityLevels = taskPriorities.reduce((acc, priority) => {
             acc[priority] = taskPriortyLevelsRaw.find((item) => item._id === priority)?.count || 0;
             return acc;
-        });
+        },{});
         const recentTasks = await Task.find().sort({ createdAt: -1 }).limit(10).select("title status priority dueDate createAt");
         res.status(200).json({
             statistics: {

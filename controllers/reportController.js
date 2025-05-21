@@ -53,7 +53,7 @@ const exportUsersReports = async (req, res) => {
             "name email _id"
         );
         const userTaskMap = {};
-        users.forEach((user) => {
+        user.forEach((user) => {
             userTaskMap[user._id] = {
                 name: user.name,
                 email: user.email,

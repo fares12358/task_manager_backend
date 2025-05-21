@@ -32,7 +32,7 @@ app.use("/Uploads",express.static(path.join(__dirname,"Uploads")));
 
 
 app.get('/', (req, res) => {
-    res.json({ message: "welcome in back end" });
+    res.json({ message: "welcome in backend" });
 });
 
 const PORT =process.env.PORT || 5000;
